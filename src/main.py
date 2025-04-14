@@ -21,7 +21,10 @@ def main():
 
     lines_committed, detailed_info = github.get_commit_lines(date_since, github_user)
 
-    message = f"Today, the creator of Tradeshaven committed {lines_committed} lines of code to the project!"
+    if lines_committed > 0:
+        message = f"Today, the creator committed {lines_committed} lines of code to the project!"
+    else:
+        message = f"The creator didn't commit any lines of code today, lazy bum."
 
     mastodon_publisher.post_update(message)
     print(f"Message posted to Mastodon {message}.")
